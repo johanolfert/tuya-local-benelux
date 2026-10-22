@@ -1,6 +1,9 @@
 {
     "domain": "tuya_local_benelux",
     "name": "Tuya Local Benelux",
+    "categories": [
+        "climate"
+    ],
     "codeowners": [
         "@johanolfert"
     ],
