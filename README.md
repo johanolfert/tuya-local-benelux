@@ -1,10 +1,10 @@
 
 ![logo](custom_components/tuya_local_benelux/brand/icon.svg) 
 
-
-
-
 A Benelux air conditioner fork of [Tuya Local].
+
+
+
 
 This is a Home Assistant integration to support devices running Tuya
 firmware without going via the Tuya cloud.  Devices are supported
