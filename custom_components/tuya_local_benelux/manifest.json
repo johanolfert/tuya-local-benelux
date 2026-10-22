@@ -1,0 +1,22 @@
+{
+    "domain": "tuya_local_benelux",
+    "name": "Tuya Local Benelux",
+    "codeowners": [
+        "@johanolfert"
+    ],
+    "config_flow": true,
+    "dependencies": [],
+    "documentation": "https://github.com/johanolfert/tuya-local-benelux",
+    "integration_type": "device",
+    "iot_class": "local_push",
+    "issue_tracker": "https://github.com/johanolfert/tuya-local-benelux/issues",
+    "loggers": [
+        "tuya_local_benelux",
+        "tinytuya"
+    ],
+    "requirements": [
+        "tinytuya==1.20.0",
+        "tuya-device-sharing-sdk~=0.2.4"
+    ],
+    "version": "2026.10.1"
+}
