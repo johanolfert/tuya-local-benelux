@@ -1,8 +1,8 @@
 
-
-
-
 ![logo](custom_components/tuya_local_benelux/brand/icon.svg) 
+
+
+
 
 A Benelux air conditioner fork of [Tuya Local].
 
