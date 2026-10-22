@@ -288,6 +288,46 @@
                     }
                 }
             },
+            "aircon_vertical_positions": {
+                "name": "エアコン",
+                "state_attributes": {
+                    "fan_mode": {
+                        "state": {
+                            "health": "ヘルシー",
+                            "medhigh": "中強",
+                            "medlow": "中低",
+                            "natural": "ナチュラル",
+                            "quiet": "静粛",
+                            "sleep": "睡眠",
+                            "strong": "強い"
+                        }
+                    },
+                    "swing_mode": {
+                        "state": {
+                            "auto": "自動",
+                            "top": "上",
+                            "slightly_up": "やや上",
+                            "middle": "中央",
+                            "slightly_down": "やや下",
+                            "bottom": "下"
+                        }
+                    },
+                    "swing_horizontal_mode": {
+                        "state": {
+                            "leftmost": "最左",
+                            "left": "左",
+                            "center": "中",
+                            "right": "右",
+                            "rightmost": "最右",
+                            "left_swing": "左スイング",
+                            "right_swing": "右スイング",
+                            "center_swing": "中央スイング",
+                            "surround": "サラウンド",
+                            "direct": "直接"
+                        }
+                    }
+                }
+            },
             "cold_water": {
                 "name": "冷水機"
             },

@@ -288,6 +288,46 @@
                     }
                 }
             },
+            "aircon_vertical_positions": {
+                "name": "Klimatyzacja",
+                "state_attributes": {
+                    "fan_mode": {
+                        "state": {
+                            "health": "Zdrowy",
+                            "medhigh": "Średni-Mocny",
+                            "medlow": "Średni-Słaby",
+                            "natural": "Naturalny",
+                            "quiet": "Cichy",
+                            "sleep": "Uśpiony",
+                            "strong": "Silny"
+                        }
+                    },
+                    "swing_mode": {
+                        "state": {
+                            "auto": "Automatycznie",
+                            "top": "Góra",
+                            "slightly_up": "Lekko w górę",
+                            "middle": "Środek",
+                            "slightly_down": "Lekko w dół",
+                            "bottom": "Dół"
+                        }
+                    },
+                    "swing_horizontal_mode": {
+                        "state": {
+                            "leftmost": "Najbardziej w lewo",
+                            "left": "W lewo",
+                            "center": "Środek",
+                            "right": "W prawo",
+                            "rightmost": "Najbardziej w prawo",
+                            "left_swing": "Huśtawka w lewo",
+                            "right_swing": "Huśtawka w prawo",
+                            "center_swing": "Huśtawka w środek",
+                            "surround": "Otaczający",
+                            "direct": "Bezpośredni"
+                        }
+                    }
+                }
+            },
             "cold_water": {
                 "name": "Zimna woda"
             },

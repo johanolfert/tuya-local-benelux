@@ -288,6 +288,46 @@
                     }
                 }
             },
+            "aircon_vertical_positions": {
+                "name": "ایئر کنڈیشنر",
+                "state_attributes": {
+                    "fan_mode": {
+                        "state": {
+                            "health": "صحت مند",
+                            "medhigh": "متوسط اعلیٰ",
+                            "medlow": "درمیانہ کم",
+                            "natural": "قدرتی",
+                            "quiet": "چپ چاپ",
+                            "sleep": "سونا",
+                            "strong": "مضبوط ۔"
+                        }
+                    },
+                    "swing_mode": {
+                        "state": {
+                            "auto": "خودکار",
+                            "top": "اوپر",
+                            "slightly_up": "قدرے اوپر",
+                            "middle": "درمیان",
+                            "slightly_down": "قدرے نیچے",
+                            "bottom": "نیچے"
+                        }
+                    },
+                    "swing_horizontal_mode": {
+                        "state": {
+                            "leftmost": "سب سے بائیں",
+                            "left": "بائیں",
+                            "center": "مرکز",
+                            "right": "دائیں",
+                            "rightmost": "سب سے دائیں",
+                            "left_swing": "بائیں جھول",
+                            "right_swing": "دائیں جھول",
+                            "center_swing": "مرکز جھول",
+                            "surround": "گھیرنا",
+                            "direct": "براہ راست"
+                        }
+                    }
+                }
+            },
             "cold_water": {
                 "name": "ٹھنڈا پانی"
             },

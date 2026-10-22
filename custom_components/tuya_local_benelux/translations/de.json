@@ -288,6 +288,46 @@
                     }
                 }
             },
+            "aircon_vertical_positions": {
+                "name": "Klimaanlage",
+                "state_attributes": {
+                    "fan_mode": {
+                        "state": {
+                            "health": "Gesund",
+                            "medhigh": "Mittel-hoch",
+                            "medlow": "Mittel-niedrig",
+                            "natural": "Natürlich",
+                            "quiet": "Leise",
+                            "sleep": "Schlafen",
+                            "strong": "Stark"
+                        }
+                    },
+                    "swing_mode": {
+                        "state": {
+                            "auto": "Automatisch",
+                            "top": "Oben",
+                            "slightly_up": "Leicht nach oben",
+                            "middle": "Mitte",
+                            "slightly_down": "Leicht nach unten",
+                            "bottom": "Unten"
+                        }
+                    },
+                    "swing_horizontal_mode": {
+                        "state": {
+                            "leftmost": "Ganz links",
+                            "left": "Links",
+                            "center": "Mitte",
+                            "right": "Rechts",
+                            "rightmost": "Ganz rechts",
+                            "left_swing": "Links schwingen",
+                            "right_swing": "Rechts schwingen",
+                            "center_swing": "Mitte schwingen",
+                            "surround": "Umgebung",
+                            "direct": "Direkt"
+                        }
+                    }
+                }
+            },
             "cold_water": {
                 "name": "Kaltwasserbereiter"
             },

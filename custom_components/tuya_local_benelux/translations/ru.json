@@ -288,6 +288,46 @@
                     }
                 }
             },
+            "aircon_vertical_positions": {
+                "name": "Кондиционер",
+                "state_attributes": {
+                    "fan_mode": {
+                        "state": {
+                            "health": "Здоровый",
+                            "medhigh": "Средне-высокий",
+                            "medlow": "Средне-низкий",
+                            "natural": "Естественный",
+                            "quiet": "Тихий",
+                            "sleep": "Сон",
+                            "strong": "Сильный"
+                        }
+                    },
+                    "swing_mode": {
+                        "state": {
+                            "auto": "Авто",
+                            "top": "Вверху",
+                            "slightly_up": "Немного вверх",
+                            "middle": "Посередине",
+                            "slightly_down": "Немного вниз",
+                            "bottom": "Внизу"
+                        }
+                    },
+                    "swing_horizontal_mode": {
+                        "state": {
+                            "leftmost": "Самый левый",
+                            "left": "Левый",
+                            "center": "Центр",
+                            "right": "Правый",
+                            "rightmost": "Самый правый",
+                            "left_swing": "Маятник влево",
+                            "right_swing": "Маятник вправо",
+                            "center_swing": "Маятник центр",
+                            "surround": "Окружающий",
+                            "direct": "Прямой"
+                        }
+                    }
+                }
+            },
             "cold_water": {
                 "name": "Холодная вода"
             },

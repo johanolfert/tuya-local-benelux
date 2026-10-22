@@ -288,6 +288,46 @@
                     }
                 }
             },
+            "aircon_vertical_positions": {
+                "name": "Aer condiționat",
+                "state_attributes": {
+                    "fan_mode": {
+                        "state": {
+                            "health": "Sănătos",
+                            "medhigh": "Mediu-Înalt",
+                            "medlow": "Mediu-Jos",
+                            "natural": "Natural",
+                            "quiet": "Silențios",
+                            "sleep": "Somn",
+                            "strong": "Puternic"
+                        }
+                    },
+                    "swing_mode": {
+                        "state": {
+                            "auto": "Automat",
+                            "top": "Sus",
+                            "slightly_up": "Ușor în sus",
+                            "middle": "Mijloc",
+                            "slightly_down": "Ușor în jos",
+                            "bottom": "Jos"
+                        }
+                    },
+                    "swing_horizontal_mode": {
+                        "state": {
+                            "leftmost": "Foarte stânga",
+                            "left": "Stânga",
+                            "center": "Centru",
+                            "right": "Dreapta",
+                            "rightmost": "Foarte dreapta",
+                            "left_swing": "Oscilație stânga",
+                            "right_swing": "Oscilație dreapta",
+                            "center_swing": "Oscilație centru",
+                            "surround": "În jur",
+                            "direct": "Direct"
+                        }
+                    }
+                }
+            },
             "cold_water": {
                 "name": "Apă rece"
             },

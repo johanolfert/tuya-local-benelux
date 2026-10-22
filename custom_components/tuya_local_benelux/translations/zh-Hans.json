@@ -288,6 +288,46 @@
                     }
                 }
             },
+            "aircon_vertical_positions": {
+                "name": "空调",
+                "state_attributes": {
+                    "fan_mode": {
+                        "state": {
+                            "health": "健康",
+                            "medhigh": "中高",
+                            "medlow": "中低",
+                            "natural": "自然",
+                            "quiet": "安静",
+                            "sleep": "睡眠",
+                            "strong": "强力"
+                        }
+                    },
+                    "swing_mode": {
+                        "state": {
+                            "auto": "自动",
+                            "top": "顶部",
+                            "slightly_up": "稍微向上",
+                            "middle": "中间",
+                            "slightly_down": "稍微向下",
+                            "bottom": "底部"
+                        }
+                    },
+                    "swing_horizontal_mode": {
+                        "state": {
+                            "leftmost": "最左",
+                            "left": "左",
+                            "center": "中",
+                            "right": "右",
+                            "rightmost": "最右",
+                            "left_swing": "左摆",
+                            "right_swing": "右摆",
+                            "center_swing": "中摆",
+                            "surround": "环绕",
+                            "direct": "定向"
+                        }
+                    }
+                }
+            },
             "cold_water": {
                 "name": "冷水机"
             },

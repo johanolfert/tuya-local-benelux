@@ -288,6 +288,46 @@
                     }
                 }
             },
+            "aircon_vertical_positions": {
+                "name": "Luftkonditionering",
+                "state_attributes": {
+                    "fan_mode": {
+                        "state": {
+                            "health": "Hälsosam",
+                            "medhigh": "Medel Hög",
+                            "medlow": "Medel Låg",
+                            "natural": "Naturlig",
+                            "quiet": "Tyst",
+                            "sleep": "Sömn",
+                            "strong": "Stark"
+                        }
+                    },
+                    "swing_mode": {
+                        "state": {
+                            "auto": "Automatisk",
+                            "top": "Överst",
+                            "slightly_up": "Lite uppåt",
+                            "middle": "Mitten",
+                            "slightly_down": "Lite nedåt",
+                            "bottom": "Nederst"
+                        }
+                    },
+                    "swing_horizontal_mode": {
+                        "state": {
+                            "leftmost": "Längst till vänster",
+                            "left": "Vänster",
+                            "center": "Centrum",
+                            "right": "Höger",
+                            "rightmost": "Längst till höger",
+                            "left_swing": "Vänster sväng",
+                            "right_swing": "Höger sväng",
+                            "center_swing": "Centrum sväng",
+                            "surround": "Runt",
+                            "direct": "Direkt"
+                        }
+                    }
+                }
+            },
             "cold_water": {
                 "name": "Kallvattenberedare"
             },

@@ -288,6 +288,46 @@
                     }
                 }
             },
+            "aircon_vertical_positions": {
+                "name": "Air conditioner",
+                "state_attributes": {
+                    "fan_mode": {
+                        "state": {
+                            "health": "Healthy",
+                            "medhigh": "Medium-High",
+                            "medlow": "Medium-Low",
+                            "natural": "Natural",
+                            "quiet": "Quiet",
+                            "sleep": "Sleep",
+                            "strong": "Strong"
+                        }
+                    },
+                    "swing_mode": {
+                        "state": {
+                            "auto": "Auto",
+                            "top": "Top",
+                            "slightly_up": "Slightly up",
+                            "middle": "Middle",
+                            "slightly_down": "Slightly down",
+                            "bottom": "Bottom"
+                        }
+                    },
+                    "swing_horizontal_mode": {
+                        "state": {
+                            "leftmost": "Leftmost",
+                            "left": "Left",
+                            "center": "Center",
+                            "right": "Right",
+                            "rightmost": "Rightmost",
+                            "left_swing": "Left swing",
+                            "right_swing": "Right swing",
+                            "center_swing": "Center swing",
+                            "surround": "Surround",
+                            "direct": "Direct"
+                        }
+                    }
+                }
+            },
             "cold_water": {
                 "name": "Cold water dispenser"
             },

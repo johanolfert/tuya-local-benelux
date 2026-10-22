@@ -288,6 +288,46 @@
                     }
                 }
             },
+            "aircon_vertical_positions": {
+                "name": "Климатик",
+                "state_attributes": {
+                    "fan_mode": {
+                        "state": {
+                            "health": "Здрави",
+                            "medhigh": "Средна височина",
+                            "medlow": "Средно-нисък",
+                            "natural": "Естествено",
+                            "quiet": "Тихо",
+                            "sleep": "Сън",
+                            "strong": "Силен"
+                        }
+                    },
+                    "swing_mode": {
+                        "state": {
+                            "auto": "Автоматично",
+                            "top": "Горе",
+                            "slightly_up": "Леко нагоре",
+                            "middle": "Среда",
+                            "slightly_down": "Леко надолу",
+                            "bottom": "Долу"
+                        }
+                    },
+                    "swing_horizontal_mode": {
+                        "state": {
+                            "leftmost": "Най-вляво",
+                            "left": "Ляво",
+                            "center": "Среден",
+                            "right": "Право",
+                            "rightmost": "Най-вдясно",
+                            "left_swing": "Ляв люлеене",
+                            "right_swing": "Дясно люлеене",
+                            "center_swing": "Център люлеене",
+                            "surround": "Около",
+                            "direct": "Директно"
+                        }
+                    }
+                }
+            },
             "cold_water": {
                 "name": "Студена вода"
             },

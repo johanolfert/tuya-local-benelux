@@ -1,7 +1,7 @@
 name: Benelux air conditioner
 entities:
   - entity: climate
-    translation_only_key: aircon_extra
+    translation_only_key: aircon_vertical_positions
     dps:
       - id: 1
         type: boolean
@@ -100,22 +100,22 @@ entities:
         name: swing_mode
         mapping:
           - dps_val: "1"
-            value: Auto
+            value: auto
           - dps_val: "0"
             constraint: vertical_position
             conditions:
               - dps_val: "0"
                 value: "off"
               - dps_val: "1"
-                value: Top
+                value: top
               - dps_val: "2"
-                value: Slightly up
+                value: slightly_up
               - dps_val: "3"
-                value: Middle
+                value: middle
               - dps_val: "4"
-                value: Slightly down
+                value: slightly_down
               - dps_val: "5"
-                value: Bottom
+                value: bottom
       - id: 126
         type: string
         name: vertical_position

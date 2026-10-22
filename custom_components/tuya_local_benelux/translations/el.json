@@ -288,6 +288,46 @@
                     }
                 }
             },
+            "aircon_vertical_positions": {
+                "name": "Κλιματιστικό",
+                "state_attributes": {
+                    "fan_mode": {
+                        "state": {
+                            "health": "Υγιεινό",
+                            "medhigh": "Μεσαίο-Υψηλό",
+                            "medlow": "Μεσαίο-Χαμηλό",
+                            "natural": "Φυσικό",
+                            "quiet": "Ήσυχο",
+                            "sleep": "Αναμονή",
+                            "strong": "Δυνατό"
+                        }
+                    },
+                    "swing_mode": {
+                        "state": {
+                            "auto": "Αυτόματο",
+                            "top": "Πάνω",
+                            "slightly_up": "Ελαφρώς πάνω",
+                            "middle": "Μέση",
+                            "slightly_down": "Ελαφρώς κάτω",
+                            "bottom": "Κάτω"
+                        }
+                    },
+                    "swing_horizontal_mode": {
+                        "state": {
+                            "leftmost": "Αριστερότερο δυνατόν",
+                            "left": "Αριστερό",
+                            "center": "Κέντρο",
+                            "right": "Δεξί",
+                            "rightmost": "Δεξιότερο δυνατόν",
+                            "left_swing": "Αριστερή κίνηση",
+                            "right_swing": "Δεξιά κίνηση",
+                            "center_swing": "Κίνηση κέντρου",
+                            "surround": "Περιστροφή",
+                            "direct": "Κατευθείαν"
+                        }
+                    }
+                }
+            },
             "cold_water": {
                 "name": "Κρύο νερό"
             },

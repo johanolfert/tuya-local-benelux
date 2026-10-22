@@ -288,6 +288,46 @@
                     }
                 }
             },
+            "aircon_vertical_positions": {
+                "name": "Klimatizace",
+                "state_attributes": {
+                    "fan_mode": {
+                        "state": {
+                            "health": "Zdravý",
+                            "medhigh": "Středně vysoký",
+                            "medlow": "Středně nízký",
+                            "natural": "Přírodní",
+                            "quiet": "Klid",
+                            "sleep": "Spát",
+                            "strong": "Silný"
+                        }
+                    },
+                    "swing_mode": {
+                        "state": {
+                            "auto": "Automaticky",
+                            "top": "Nahoře",
+                            "slightly_up": "Mírně nahoru",
+                            "middle": "Uprostřed",
+                            "slightly_down": "Mírně dolů",
+                            "bottom": "Dole"
+                        }
+                    },
+                    "swing_horizontal_mode": {
+                        "state": {
+                            "leftmost": "Nejlevější",
+                            "left": "Vlevo",
+                            "center": "Střed",
+                            "right": "Vpravo",
+                            "rightmost": "Nejpravější",
+                            "left_swing": "Vlevo kyvadlo",
+                            "right_swing": "Vpravo kyvadlo",
+                            "center_swing": "Kyvadlo středu",
+                            "surround": "Obklopit",
+                            "direct": "Přímo"
+                        }
+                    }
+                }
+            },
             "cold_water": {
                 "name": "Chladná voda"
             },

@@ -288,6 +288,46 @@
                     }
                 }
             },
+            "aircon_vertical_positions": {
+                "name": "Klimaanlegg",
+                "state_attributes": {
+                    "fan_mode": {
+                        "state": {
+                            "health": "Healthy",
+                            "medhigh": "Medium-Høy",
+                            "medlow": "Medium-Lav",
+                            "natural": "Nøytral",
+                            "quiet": "Stille",
+                            "sleep": "Søvn",
+                            "strong": "Sterk"
+                        }
+                    },
+                    "swing_mode": {
+                        "state": {
+                            "auto": "Automatisk",
+                            "top": "Øverst",
+                            "slightly_up": "Litt opp",
+                            "middle": "Midten",
+                            "slightly_down": "Litt ned",
+                            "bottom": "Nederst"
+                        }
+                    },
+                    "swing_horizontal_mode": {
+                        "state": {
+                            "leftmost": "Venstre",
+                            "left": "Midt-venstre",
+                            "center": "Senter",
+                            "right": "Midt-høyre",
+                            "rightmost": "Høyre",
+                            "left_swing": "Venstre sving",
+                            "right_swing": "Høyre sving",
+                            "center_swing": "Senter sving",
+                            "surround": "Omgivelse",
+                            "direct": "Direkte"
+                        }
+                    }
+                }
+            },
             "cold_water": {
                 "name": "Kaldtvannsbereder"
             },

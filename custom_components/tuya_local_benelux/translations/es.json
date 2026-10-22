@@ -288,6 +288,46 @@
                     }
                 }
             },
+            "aircon_vertical_positions": {
+                "name": "Aire acondicionado",
+                "state_attributes": {
+                    "fan_mode": {
+                        "state": {
+                            "health": "Saludable",
+                            "medhigh": "Altura media",
+                            "medlow": "Medio-bajo",
+                            "natural": "Natural",
+                            "quiet": "Tranquilo",
+                            "sleep": "Dormir",
+                            "strong": "Fuerte"
+                        }
+                    },
+                    "swing_mode": {
+                        "state": {
+                            "auto": "Automático",
+                            "top": "Arriba",
+                            "slightly_up": "Ligeramente hacia arriba",
+                            "middle": "Centro",
+                            "slightly_down": "Ligeramente hacia abajo",
+                            "bottom": "Abajo"
+                        }
+                    },
+                    "swing_horizontal_mode": {
+                        "state": {
+                            "leftmost": "Más a la izquierda",
+                            "left": "Izquierda",
+                            "center": "Centro",
+                            "right": "Derecha",
+                            "rightmost": "Más a la derecha",
+                            "left_swing": "Oscilación izquierda",
+                            "right_swing": "Oscilación derecha",
+                            "center_swing": "Oscilación central",
+                            "surround": "Alrededor",
+                            "direct": "Directo"
+                        }
+                    }
+                }
+            },
             "cold_water": {
                 "name": "Agua fría"
             },

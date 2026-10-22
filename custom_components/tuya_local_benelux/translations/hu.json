@@ -288,6 +288,46 @@
                     }
                 }
             },
+            "aircon_vertical_positions": {
+                "name": "Légkondicionáló",
+                "state_attributes": {
+                    "fan_mode": {
+                        "state": {
+                            "health": "Egészséges",
+                            "medhigh": "Közepesen magas",
+                            "medlow": "Közepes-alacsony",
+                            "natural": "Természetes",
+                            "quiet": "Csendes",
+                            "sleep": "Alvás",
+                            "strong": "Erős"
+                        }
+                    },
+                    "swing_mode": {
+                        "state": {
+                            "auto": "Automatikus",
+                            "top": "Fent",
+                            "slightly_up": "Enyhén felfelé",
+                            "middle": "Középen",
+                            "slightly_down": "Enyhén lefelé",
+                            "bottom": "Lent"
+                        }
+                    },
+                    "swing_horizontal_mode": {
+                        "state": {
+                            "leftmost": "Legbaloldalibb",
+                            "left": "Balra",
+                            "center": "Középre",
+                            "right": "Jobbra",
+                            "rightmost": "Legjobboldalibb",
+                            "left_swing": "Balra lengő",
+                            "right_swing": "Jobbra lengő",
+                            "center_swing": "Középre lengő",
+                            "surround": "Körül",
+                            "direct": "Közvetlen"
+                        }
+                    }
+                }
+            },
             "cold_water": {
                 "name": "Hideg víz"
             },

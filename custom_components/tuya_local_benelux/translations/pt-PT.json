@@ -288,6 +288,46 @@
                     }
                 }
             },
+            "aircon_vertical_positions": {
+                "name": "Ar condicionado extra",
+                "state_attributes": {
+                    "fan_mode": {
+                        "state": {
+                            "health": "Saudável",
+                            "medhigh": "Médio-alto",
+                            "medlow": "Médio-baixo",
+                            "natural": "Natural",
+                            "quiet": "Quieto",
+                            "sleep": "Dormir",
+                            "strong": "Forte"
+                        }
+                    },
+                    "swing_mode": {
+                        "state": {
+                            "auto": "Automático",
+                            "top": "Superior",
+                            "slightly_up": "Ligeiramente para cima",
+                            "middle": "Meio",
+                            "slightly_down": "Ligeiramente para baixo",
+                            "bottom": "Inferior"
+                        }
+                    },
+                    "swing_horizontal_mode": {
+                        "state": {
+                            "leftmost": "Mais à esquerda",
+                            "left": "Esquerda",
+                            "center": "Centro",
+                            "right": "Direita",
+                            "rightmost": "Mais à direita",
+                            "left_swing": "Oscilação esquerda",
+                            "right_swing": "Oscilação direita",
+                            "center_swing": "Oscilação central",
+                            "surround": "Ao redor",
+                            "direct": "Direto"
+                        }
+                    }
+                }
+            },
             "cold_water": {
                 "name": "Água fria"
             },

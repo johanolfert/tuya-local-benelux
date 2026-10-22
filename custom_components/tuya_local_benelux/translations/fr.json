@@ -288,6 +288,46 @@
                     }
                 }
             },
+            "aircon_vertical_positions": {
+                "name": "Climatiseur",
+                "state_attributes": {
+                    "fan_mode": {
+                        "state": {
+                            "health": "Sain",
+                            "medhigh": "Moyen-Haut",
+                            "medlow": "Moyen-Bas",
+                            "natural": "Naturel",
+                            "quiet": "Silence",
+                            "sleep": "Veille",
+                            "strong": "Fort"
+                        }
+                    },
+                    "swing_mode": {
+                        "state": {
+                            "auto": "Auto",
+                            "top": "Haut",
+                            "slightly_up": "Légèrement vers le haut",
+                            "middle": "Milieu",
+                            "slightly_down": "Légèrement vers le bas",
+                            "bottom": "Bas"
+                        }
+                    },
+                    "swing_horizontal_mode": {
+                        "state": {
+                            "leftmost": "Très à gauche",
+                            "left": "Gauche",
+                            "center": "Centre",
+                            "right": "Droite",
+                            "rightmost": "Très à droite",
+                            "left_swing": "Oscillation gauche",
+                            "right_swing": "Oscillation droite",
+                            "center_swing": "Oscillation centrale",
+                            "surround": "Environnant",
+                            "direct": "Direct"
+                        }
+                    }
+                }
+            },
             "cold_water": {
                 "name": "Eau froide"
             },

@@ -288,6 +288,46 @@
                     }
                 }
             },
+            "aircon_vertical_positions": {
+                "name": "Aire condicionat",
+                "state_attributes": {
+                    "fan_mode": {
+                        "state": {
+                            "medhigh": "Mitjana-alta",
+                            "medlow": "Mitjana-baixa",
+                            "natural": "Natural",
+                            "quiet": "Silenciós",
+                            "sleep": "Dorm",
+                            "health": "Saludable",
+                            "strong": "Fort"
+                        }
+                    },
+                    "swing_mode": {
+                        "state": {
+                            "auto": "Automàtic",
+                            "top": "Superior",
+                            "slightly_up": "Lleugerament amunt",
+                            "middle": "Mig",
+                            "slightly_down": "Lleugerament avall",
+                            "bottom": "Inferior"
+                        }
+                    },
+                    "swing_horizontal_mode": {
+                        "state": {
+                            "left": "Esquerra",
+                            "leftmost": "Més a l'esquerra",
+                            "rightmost": "Més a la dreta",
+                            "right": "Dreta",
+                            "center": "Centre",
+                            "left_swing": "Balanceig a l'esquerra",
+                            "right_swing": "Balanceig a la dreta",
+                            "center_swing": "Balanceig al centre",
+                            "surround": "Al voltant",
+                            "direct": "Directe"
+                        }
+                    }
+                }
+            },
             "cold_water": {
                 "name": "Aigua freda"
             },

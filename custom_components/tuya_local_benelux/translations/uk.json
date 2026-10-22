@@ -288,6 +288,46 @@
                     }
                 }
             },
+            "aircon_vertical_positions": {
+                "name": "Кондиціонер",
+                "state_attributes": {
+                    "fan_mode": {
+                        "state": {
+                            "health": "Здоровий",
+                            "medhigh": "Середньо-високий",
+                            "medlow": "Середньо-низький",
+                            "natural": "Природні",
+                            "quiet": "Спокійно",
+                            "sleep": "Сон",
+                            "strong": "Сильний"
+                        }
+                    },
+                    "swing_mode": {
+                        "state": {
+                            "auto": "Авто",
+                            "top": "Вгорі",
+                            "slightly_up": "Трохи вгору",
+                            "middle": "Посередині",
+                            "slightly_down": "Трохи вниз",
+                            "bottom": "Внизу"
+                        }
+                    },
+                    "swing_horizontal_mode": {
+                        "state": {
+                            "leftmost": "Самий лівий",
+                            "left": "Лівий",
+                            "center": "Центр",
+                            "right": "Правий",
+                            "rightmost": "Самий правий",
+                            "left_swing": "Лівий гойдалка",
+                            "right_swing": "Правий гойдалка",
+                            "center_swing": "Центр гойдалка",
+                            "surround": "Навколо",
+                            "direct": "Прямий"
+                        }
+                    }
+                }
+            },
             "cold_water": {
                 "name": "Холодна вода"
             },

@@ -288,6 +288,46 @@
                     }
                 }
             },
+            "aircon_vertical_positions": {
+                "name": "AC",
+                "state_attributes": {
+                    "fan_mode": {
+                        "state": {
+                            "health": "Sehat",
+                            "medhigh": "Sedang-Cepat",
+                            "medlow": "Sedang-Lambat",
+                            "natural": "Natural",
+                            "quiet": "Senyap",
+                            "sleep": "Tidur",
+                            "strong": "Kencang"
+                        }
+                    },
+                    "swing_mode": {
+                        "state": {
+                            "auto": "Otomatis",
+                            "top": "Atas",
+                            "slightly_up": "Sedikit ke atas",
+                            "middle": "Tengah",
+                            "slightly_down": "Sedikit ke bawah",
+                            "bottom": "Bawah"
+                        }
+                    },
+                    "swing_horizontal_mode": {
+                        "state": {
+                            "leftmost": "Paling kiri",
+                            "left": "Kiri",
+                            "center": "Tengah",
+                            "right": "Kanan",
+                            "rightmost": "Paling kanan",
+                            "left_swing": "Ayunan kiri",
+                            "right_swing": "Ayunan kanan",
+                            "center_swing": "Ayunan tengah",
+                            "surround": "Mengelilingi",
+                            "direct": "Langsung"
+                        }
+                    }
+                }
+            },
             "cold_water": {
                 "name": "Air dingin"
             },

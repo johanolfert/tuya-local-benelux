@@ -91,12 +91,6 @@
                     },
                     "swing_mode": {
                         "state": {
-                            "Auto": "mdi:swap-vertical",
-                            "Top": "mdi:arrow-up",
-                            "Slightly up": "mdi:arrow-top-right",
-                            "Middle": "mdi:arrow-right",
-                            "Slightly down": "mdi:arrow-bottom-right",
-                            "Bottom": "mdi:arrow-down",
                             "topmost": "mdi:arrow-up",
                             "top": "mdi:arrow-top-right",
                             "middle": "mdi:arrow-right",
@@ -262,6 +256,44 @@
                     "hvac_mode": {
                         "state": {
                             "fan_only": "mdi:pause"
+                        }
+                    }
+                }
+            },
+            "aircon_vertical_positions": {
+                "default": "mdi:air-conditioner",
+                "state_attributes": {
+                    "fan_mode": {
+                        "state": {
+                            "health": "mdi:heart-pulse",
+                            "medhigh": "mdi:fan-chevron-up",
+                            "medlow": "mdi:fan-chevron-down",
+                            "natural": "mdi:leaf",
+                            "quiet": "mdi:weather-night",
+                            "sleep": "mdi:sleep",
+                            "strong": "mdi:weather-hurricane"
+                        }
+                    },
+                    "swing_mode": {
+                        "state": {
+                            "auto": "mdi:swap-vertical",
+                            "top": "mdi:arrow-up",
+                            "slightly_up": "mdi:arrow-top-right",
+                            "middle": "mdi:arrow-right",
+                            "slightly_down": "mdi:arrow-bottom-right",
+                            "bottom": "mdi:arrow-down"
+                        }
+                    },
+                    "swing_horizontal_mode": {
+                        "state": {
+                            "leftmost": "mdi:arrow-left",
+                            "left": "mdi:arrow-bottom-left",
+                            "middle": "mdi:arrow-down",
+                            "right": "mdi:arrow-bottom-right",
+                            "rightmost": "mdi:arrow-right",
+                            "left_half": "mdi:arrow-expand-left",
+                            "right_half": "mdi:arrow-expand-right",
+                            "surround": "mdi:sync"
                         }
                     }
                 }
