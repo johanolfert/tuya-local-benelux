@@ -250,15 +250,6 @@ entities:
         name: switch
         mask: "8000"
   - entity: switch
-    name: Anti-mildew
-    category: config
-    icon: "mdi:water-off-outline"
-    dps:
-      - id: 123
-        type: hex
-        name: switch
-        mask: "0100"
-  - entity: switch
     name: Health
     category: config
     icon: "mdi:heart-outline"
@@ -267,14 +258,6 @@ entities:
         type: hex
         name: switch
         mask: "0020"
-  - entity: switch
-    translation_key: anti_frost
-    category: config
-    dps:
-      - id: 123
-        type: hex
-        name: switch
-        mask: "1000"
   - entity: switch
     name: Eco mode
     category: config
