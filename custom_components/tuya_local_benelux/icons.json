@@ -91,6 +91,12 @@
                     },
                     "swing_mode": {
                         "state": {
+                            "Auto": "mdi:swap-vertical",
+                            "Top": "mdi:arrow-up",
+                            "Slightly up": "mdi:arrow-top-right",
+                            "Middle": "mdi:arrow-right",
+                            "Slightly down": "mdi:arrow-bottom-right",
+                            "Bottom": "mdi:arrow-down",
                             "topmost": "mdi:arrow-up",
                             "top": "mdi:arrow-top-right",
                             "middle": "mdi:arrow-right",
