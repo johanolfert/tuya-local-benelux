@@ -224,6 +224,9 @@ class TuyaLocalDevice(object):
     async def async_stop(self, event=None):
         _LOGGER.debug("Stopping monitor loop for %s", self.name)
         self._running = False
+        if self._pending_state_timer:
+            self._pending_state_timer.cancel()
+            self._pending_state_timer = None
         self._children.clear()
         self._force_dps.clear()
         if self._refresh_task:
@@ -663,6 +666,8 @@ class TuyaLocalDevice(object):
         if self._pending_state_timer:
             self._pending_state_timer.cancel()
             self._pending_state_timer = None
+        if not self._running:
+            return
         deadlines = [
             pending["updated_at"] + self._FAKE_IT_TIMEOUT
             for pending in self._pending_updates.values()

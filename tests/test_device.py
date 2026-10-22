@@ -442,6 +442,20 @@ def test_reset_cancels_pending_expiry_timer(subject, mocker):
     assert subject._pending_state_timer is None
 
 
+@pytest.mark.asyncio
+async def test_active_monitor_expiry_timer_is_cancelled_on_stop(subject):
+    subject._running = True
+    subject._pending_updates = {
+        "113": {"value": "1", "sent": True, "updated_at": time()}
+    }
+    subject._schedule_pending_expiry()
+    timer = subject._pending_state_timer
+    assert timer is not None
+    await subject.async_stop()
+    assert timer.cancelled()
+    assert subject._pending_state_timer is None
+
+
 def test_send_does_not_mark_a_newer_command_as_sent(subject, mock_api):
     subject._add_properties_to_pending_updates({"113": "1"})
 
