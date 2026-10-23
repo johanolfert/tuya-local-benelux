@@ -254,8 +254,8 @@
                                             },
                                             "scale": {
                                                 "type": "number",
-                                                "description": "An optional scale to apply when this mapping is matched.",
-                                                "exclusiveMinimum": 0
+                                                "description": "An optional nonzero scale to apply when this mapping is matched. Negative values reverse the sign.",
+                                                "not": { "const": 0 }
                                             },
                                             "step": {
                                                 "type": "integer",
@@ -377,8 +377,8 @@
                                                         },
                                                         "scale": {
                                                             "type": "number",
-                                                            "description": "An optional scale to apply when this mapping is matched.",
-                                                            "exclusiveMinimum": 0
+                                                            "description": "An optional nonzero scale to apply when this mapping is matched. Negative values reverse the sign.",
+                                                            "not": { "const": 0 }
                                                         },
                                                         "step": {
                                                             "type": "integer",
