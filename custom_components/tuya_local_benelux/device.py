@@ -144,6 +144,8 @@ class TuyaLocalDevice(object):
         self._protocol_configured = protocol_version
         self._poll_only = poll_only
         self._temporary_poll = False
+        self._command_refresh_pending = False
+        self._pending_state_timer = None
         self._reset_cached_state()
 
         self._hass = hass
@@ -222,6 +224,9 @@ class TuyaLocalDevice(object):
     async def async_stop(self, event=None):
         _LOGGER.debug("Stopping monitor loop for %s", self.name)
         self._running = False
+        if self._pending_state_timer:
+            self._pending_state_timer.cancel()
+            self._pending_state_timer = None
         self._children.clear()
         self._force_dps.clear()
         if self._refresh_task:
@@ -365,13 +370,17 @@ class TuyaLocalDevice(object):
                     self._last_full_poll = 0  # ensure we start with a full poll
 
                 needs_full_poll = now - self._last_full_poll > self._POLLING_INTERVAL
-                if now - last_cache > self._POLLING_INTERVAL or (
-                    persist and needs_full_poll
+                command_refresh = self._command_refresh_pending
+                if (
+                    command_refresh
+                    or now - last_cache > self._POLLING_INTERVAL
+                    or (persist and needs_full_poll)
                 ):
                     if (
                         self._force_dps
                         and not dps_updated
                         and self._api_protocol_working
+                        and not command_refresh
                     ):
                         poll = await self._retry_on_failed_connection(
                             lambda: self._api.updatedps(self._force_dps),
@@ -379,6 +388,9 @@ class TuyaLocalDevice(object):
                         )
                         dps_updated = True
                     else:
+                        # Clear before awaiting so a newer command can request
+                        # another readback while this status query is running.
+                        self._command_refresh_pending = False
                         poll = await self._retry_on_failed_connection(
                             lambda: self._api.status(),
                             f"Failed to fetch device status for {self.name}",
@@ -556,8 +568,12 @@ class TuyaLocalDevice(object):
         self._cached_state[dps_id] = value
 
     def _reset_cached_state(self):
+        if self._pending_state_timer:
+            self._pending_state_timer.cancel()
+            self._pending_state_timer = None
         self._cached_state = {"updated_at": 0}
         self._pending_updates = {}
+        self._command_refresh_pending = False
         self._last_connection = 0
         self._last_full_poll = 0
 
@@ -603,7 +619,19 @@ class TuyaLocalDevice(object):
             return
 
         self._add_properties_to_pending_updates(properties)
-        await self._debounce_sending_updates()
+        self._publish_pending_state()
+        try:
+            await self._debounce_sending_updates()
+        finally:
+            # Sending can fail and clear the pending cache. Publish that result
+            # as well, rather than leaving the requested state on screen.
+            self._publish_pending_state()
+
+    @callback
+    def _publish_pending_state(self):
+        """Keep every control backed by this device in sync with pending writes."""
+        for entity in tuple(self._children):
+            entity.async_schedule_update_ha_state()
 
     def _add_properties_to_pending_updates(self, properties):
         now = time()
@@ -628,6 +656,36 @@ class TuyaLocalDevice(object):
             for key, value in self._pending_updates.items()
             if key not in data or not value["sent"] or data[key] != value["value"]
         }
+        if not self._pending_updates and self._pending_state_timer:
+            self._pending_state_timer.cancel()
+            self._pending_state_timer = None
+
+    @callback
+    def _schedule_pending_expiry(self):
+        """Publish expiry even when the device sends no subsequent messages."""
+        if self._pending_state_timer:
+            self._pending_state_timer.cancel()
+            self._pending_state_timer = None
+        if not self._running:
+            return
+        deadlines = [
+            pending["updated_at"] + self._FAKE_IT_TIMEOUT
+            for pending in self._pending_updates.values()
+            if pending["sent"]
+        ]
+        if deadlines:
+            self._pending_state_timer = self._hass.loop.call_later(
+                max(0.01, min(deadlines) - time()), self._expire_pending_state
+            )
+
+    @callback
+    def _expire_pending_state(self):
+        self._pending_state_timer = None
+        self._get_pending_updates()
+        self._publish_pending_state()
+        if self._running:
+            self._command_refresh_pending = True
+        self._schedule_pending_expiry()
 
     async def _debounce_sending_updates(self):
         now = time()
@@ -645,6 +703,8 @@ class TuyaLocalDevice(object):
 
     async def _send_pending_updates(self):
         pending_properties = self._get_unsent_properties()
+        if not pending_properties:
+            return
 
         _LOGGER.debug(
             "%s sending dps update: %s",
@@ -652,19 +712,32 @@ class TuyaLocalDevice(object):
             log_json(pending_properties),
         )
 
-        await self._retry_on_failed_connection(
+        sent = await self._retry_on_failed_connection(
             lambda: self._set_values(pending_properties),
             "Failed to update device state.",
         )
+        if sent is True:
+            # Let the existing receiver perform a full readback on its next
+            # iteration instead of waiting for the normal 30-second poll.
+            self._command_refresh_pending = True
+            self._schedule_pending_expiry()
 
     def _set_values(self, properties):
-        self._api.set_multiple_values(properties, nowait=True)
+        queued = {key: self._pending_updates.get(key) for key in properties}
+        result = self._api.set_multiple_values(properties, nowait=True)
+        if isinstance(result, dict) and "Error" in result:
+            return result
         now = time()
         self._last_connection = now
         pending_updates = self._get_pending_updates()
-        for key in properties.keys():
-            pending_updates[key]["updated_at"] = now
-            pending_updates[key]["sent"] = True
+        for key in properties:
+            pending = pending_updates.get(key)
+            # A newer command or device confirmation may arrive while the
+            # executor sends this packet. Never mark that newer value as sent.
+            if pending is not None and pending is queued[key]:
+                pending["updated_at"] = now
+                pending["sent"] = True
+        return True
 
     async def _retry_on_failed_connection(self, func, error_message):
         if self._api_protocol_version_index is None:

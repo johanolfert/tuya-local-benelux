@@ -351,6 +351,169 @@ async def test_set_properties_takes_no_action_when_nothing_provided(subject, moc
     mock.assert_not_called()
 
 
+@pytest.mark.asyncio
+@pytest.mark.parametrize(
+    "properties",
+    [
+        {"113": "1"},
+        {"113": "0", "126": "1"},
+        {"113": "0", "126": "0"},
+        {"1": True},
+    ],
+)
+async def test_commands_publish_pending_state_before_sending(
+    subject, mocker, properties
+):
+    """Both linked controls see the request before waiting for device feedback."""
+    entities = [mocker.Mock(), mocker.Mock()]
+    subject._children = entities
+
+    async def send():
+        for entity in entities:
+            entity.async_schedule_update_ha_state.assert_called_once_with()
+        for key, value in properties.items():
+            assert subject.get_property(key) == value
+
+    mocker.patch.object(subject, "_debounce_sending_updates", side_effect=send)
+    await subject.async_set_properties(properties)
+    for entity in entities:
+        assert entity.async_schedule_update_ha_state.call_count == 2
+
+
+@pytest.mark.asyncio
+async def test_failed_send_publishes_cleared_pending_state(subject, mocker):
+    entity = mocker.Mock()
+    subject._children = [entity]
+
+    async def failed_send():
+        subject._reset_cached_state()
+        raise RuntimeError("Transport failed")
+
+    mocker.patch.object(subject, "_debounce_sending_updates", side_effect=failed_send)
+    with pytest.raises(RuntimeError, match="Transport failed"):
+        await subject.async_set_properties({"113": "1"})
+    assert subject.get_property("113") is None
+    assert entity.async_schedule_update_ha_state.call_count == 2
+
+
+@pytest.mark.asyncio
+async def test_successful_command_requests_status_readback(subject):
+    await subject.async_set_properties({"113": "1"})
+    assert subject._command_refresh_pending
+
+
+@pytest.mark.asyncio
+async def test_empty_pending_send_does_not_send_packet(subject, mock_api):
+    await subject._send_pending_updates()
+    mock_api().set_multiple_values.assert_not_called()
+
+
+def test_pending_expiry_publishes_old_state_when_no_feedback_arrives(subject, mocker):
+    entity = mocker.Mock()
+    subject._children = [entity]
+    subject._running = True
+    subject._cached_state = {"113": "0"}
+    subject._pending_updates = {
+        "113": {"value": "1", "sent": True, "updated_at": time() - 6}
+    }
+    subject._expire_pending_state()
+    assert subject.get_property("113") == "0"
+    entity.async_schedule_update_ha_state.assert_called_once()
+    assert subject._command_refresh_pending
+    assert subject._pending_state_timer is None
+
+
+def test_confirmed_pending_state_cancels_expiry_timer(subject, mocker):
+    subject._pending_updates = {
+        "113": {"value": "1", "sent": True, "updated_at": time()}
+    }
+    timer = mocker.Mock()
+    subject._pending_state_timer = timer
+    subject._remove_properties_from_pending_updates({"113": "1"})
+    timer.cancel.assert_called_once()
+    assert subject._pending_state_timer is None
+
+
+def test_reset_cancels_pending_expiry_timer(subject, mocker):
+    timer = mocker.Mock()
+    subject._pending_state_timer = timer
+    subject._reset_cached_state()
+    timer.cancel.assert_called_once()
+    assert subject._pending_state_timer is None
+
+
+@pytest.mark.asyncio
+async def test_active_monitor_expiry_timer_is_cancelled_on_stop(subject):
+    subject._running = True
+    subject._pending_updates = {
+        "113": {"value": "1", "sent": True, "updated_at": time()}
+    }
+    subject._schedule_pending_expiry()
+    timer = subject._pending_state_timer
+    assert timer is not None
+    await subject.async_stop()
+    assert timer.cancelled()
+    assert subject._pending_state_timer is None
+
+
+def test_send_does_not_mark_a_newer_command_as_sent(subject, mock_api):
+    subject._add_properties_to_pending_updates({"113": "1"})
+
+    def newer_command(*args, **kwargs):
+        subject._add_properties_to_pending_updates({"113": "0"})
+
+    mock_api().set_multiple_values.side_effect = newer_command
+    assert subject._set_values({"113": "1"}) is True
+    assert subject._get_unsent_properties() == {"113": "0"}
+
+
+def test_send_error_does_not_mark_values_as_sent(subject, mock_api):
+    subject._add_properties_to_pending_updates({"113": "1"})
+    error = {"Error": "Network error", "Err": "901"}
+    mock_api().set_multiple_values.return_value = error
+    assert subject._set_values({"113": "1"}) == error
+    assert subject._get_unsent_properties() == {"113": "1"}
+
+
+@pytest.mark.asyncio
+async def test_command_readback_bypasses_poll_interval_and_forced_dps(
+    subject, mock_api
+):
+    subject._running = True
+    subject._poll_only = True
+    subject._cached_state = {"113": "0", "updated_at": time()}
+    subject._last_full_poll = time()
+    subject._force_dps = [113]
+    subject._command_refresh_pending = True
+    mock_api().status.return_value = {"dps": {"113": "1"}}
+    loop = subject.async_receive()
+    result = await anext(loop)
+    assert result == {"113": "1", "full_poll": True}
+    mock_api().status.assert_called_once()
+    mock_api().updatedps.assert_not_called()
+    assert not subject._command_refresh_pending
+    await loop.aclose()
+
+
+@pytest.mark.asyncio
+async def test_new_command_during_readback_is_not_lost(subject, mock_api):
+    subject._running = True
+    subject._poll_only = True
+    subject._cached_state = {"113": "0", "updated_at": time()}
+    subject._last_full_poll = time()
+    subject._command_refresh_pending = True
+
+    def status():
+        subject._command_refresh_pending = True
+        return {"dps": {"113": "1"}}
+
+    mock_api().status.side_effect = status
+    loop = subject.async_receive()
+    await anext(loop)
+    assert subject._command_refresh_pending
+    await loop.aclose()
+
+
 def test_anticipate_property_value_updates_cached_state(subject):
     subject._cached_state = {"1": True}
     subject.anticipate_property_value("1", False)
