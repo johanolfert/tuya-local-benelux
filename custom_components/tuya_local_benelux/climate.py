@@ -29,6 +29,8 @@ from homeassistant.components.climate.const import (
 )
 from homeassistant.const import (
     ATTR_TEMPERATURE,
+    MAJOR_VERSION,
+    MINOR_VERSION,
     PRECISION_TENTHS,
     PRECISION_WHOLE,
     UnitOfTemperature,
@@ -125,7 +127,7 @@ class TuyaLocalClimate(TuyaLocalEntity, ClimateEntity):
             self._attr_supported_features |= ClimateEntityFeature.TURN_ON
 
     @property
-    def temperature_unit(self):
+    def native_temperature_unit(self):
         """Return the unit of measurement."""
         # If there is a separate DPS that returns the units, use that
         if self._unit_dps:
@@ -170,21 +172,21 @@ class TuyaLocalClimate(TuyaLocalEntity, ClimateEntity):
         return PRECISION_WHOLE
 
     @property
-    def target_temperature(self):
+    def native_target_temperature(self):
         """Return the currently set target temperature."""
         if self._temperature_dps is None:
             raise NotImplementedError()
         return self._temperature_dps.get_value(self._device)
 
     @property
-    def target_temperature_high(self):
+    def native_target_temperature_high(self):
         """Return the currently set high target temperature."""
         if self._temp_high_dps is None:
             raise NotImplementedError()
         return self._temp_high_dps.get_value(self._device)
 
     @property
-    def target_temperature_low(self):
+    def native_target_temperature_low(self):
         """Return the currently set low target temperature."""
         if self._temp_low_dps is None:
             raise NotImplementedError()
@@ -289,7 +291,7 @@ class TuyaLocalClimate(TuyaLocalEntity, ClimateEntity):
             await self._device.async_set_properties(dps_map)
 
     @property
-    def current_temperature(self):
+    def native_current_temperature(self):
         """Return the current measured temperature."""
         if self._current_temperature_dps:
             temp = self._current_temperature_dps.get_value(self._device)
@@ -299,6 +301,14 @@ class TuyaLocalClimate(TuyaLocalEntity, ClimateEntity):
                     temp, self._current_temperature_dps.suggested_display_precision
                 )
             return temp
+
+    if (MAJOR_VERSION, MINOR_VERSION) < (2026, 11):
+        # Older Home Assistant versions read these properties directly.
+        temperature_unit = native_temperature_unit
+        target_temperature = native_target_temperature
+        target_temperature_high = native_target_temperature_high
+        target_temperature_low = native_target_temperature_low
+        current_temperature = native_current_temperature
 
     @property
     def target_humidity(self):
