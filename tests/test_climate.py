@@ -1,8 +1,10 @@
-"""Tests for the light entity."""
+"""Tests for the climate entity."""
 
 from unittest.mock import AsyncMock, Mock
 
 import pytest
+from homeassistant.components.climate.const import ATTR_CURRENT_TEMPERATURE
+from homeassistant.const import ATTR_TEMPERATURE, UnitOfTemperature
 from pytest_homeassistant_custom_component.common import MockConfigEntry
 
 from custom_components.tuya_local_benelux.climate import (
@@ -15,6 +17,7 @@ from custom_components.tuya_local_benelux.const import (
     CONF_TYPE,
     DOMAIN,
 )
+from custom_components.tuya_local_benelux.helpers.device_config import get_config
 
 
 @pytest.mark.asyncio
@@ -42,6 +45,23 @@ async def test_init_entry(hass):
     await async_setup_entry(hass, entry, m_add_entities)
     assert type(hass.data[DOMAIN]["dummy"]["climate"]) is TuyaLocalClimate
     m_add_entities.assert_called_once()
+
+
+async def test_benelux_temperature_state_and_setpoint(hass):
+    """Expose the AC's temperatures through Home Assistant's climate entity."""
+    readings = {"1": True, "2": 240, "3": 22, "4": "cold", "110": 0}
+    device = Mock(get_property=readings.get, async_set_properties=AsyncMock())
+    config = get_config("benelux_airconditioner")
+    climate_config = next(e for e in config.all_entities() if e.entity == "climate")
+    entity = TuyaLocalClimate(device, climate_config)
+    entity.hass = hass
+
+    assert entity.native_temperature_unit is UnitOfTemperature.CELSIUS
+    assert entity.state_attributes[ATTR_CURRENT_TEMPERATURE] == 22
+    assert entity.state_attributes[ATTR_TEMPERATURE] == 24
+
+    await entity.async_set_temperature(temperature=24.5)
+    device.async_set_properties.assert_awaited_once_with({"2": 245})
 
 
 # After removal of deprecated entities, there are no secondary climate devices to test against.
